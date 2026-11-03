@@ -18,6 +18,7 @@ Tu es lancé en mode non interactif (`claude -p`) par un cron, sous l'utilisateu
 
 1. Pour chaque carrousel : date prévue, titre, source principale, lien Metricool du post (`plannerUrl`), chemin de la planche (`work/planches/<slug>.png`), commit.
 2. Ce que Geoffroy doit faire : relire dans Metricool avant lundi 12h15 et corriger ou supprimer ce qui ne va pas (les posts partent tout seuls sinon), ou répondre avec des corrections.
-3. Points à vérifier : chiffres non confirmés, sujets remplacés, événement daté à finaliser, erreurs rencontrées.
+3. Points à vérifier : chiffres non confirmés, sujets laissés dans le stock, événement daté à finaliser, erreurs rencontrées.
+4. Stock : nombre de sujets restants, et les sujets nouvellement proposés (famille, titre, source) s'il a fallu réapprovisionner.
 
 Si une étape échoue (rendu, push, Metricool), écris quand même le compte rendu avec l'erreur exacte et ce qui a été fait, puis termine. N'invente jamais un chiffre pour « faire passer » un carrousel : sans source, écris sans chiffre.

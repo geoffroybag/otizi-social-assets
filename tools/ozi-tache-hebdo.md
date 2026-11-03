@@ -12,10 +12,10 @@ Spécification pour une tâche automatique sur le VPS d'Ozi. Rythme : chaque ven
 
 ## Ce que la tâche fait
 
-1. `git pull`. Lire `tools/calendrier-editorial.md` : prendre les trois sujets « à faire » de la semaine suivante (lundi, mercredi, vendredi). Remplacer par un sujet de la réserve tout sujet qui dépend d'une information que seul Geoffroy a.
+1. `git pull`. Lire `tools/calendrier-editorial.md` : piocher trois sujets dans « Stock » pour le lundi, mercredi et vendredi de la semaine suivante (sujets datés d'abord, puis l'ordre de la table, trois familles). Laisser dans le stock tout sujet qui dépend d'une information que seul Geoffroy a. Si le stock tombe sous six sujets, en chercher de nouveaux sur le web (jusqu'à huit), marqués « proposé le JJ/MM », listés dans le compte rendu.
 2. Pour chaque sujet : vérifier l'actualité et chaque chiffre sur le web, noter la source. Règles de `README.md` : rien d'inventé, source en pied de slide, une idée par slide, vouvoiement, pas de pub dans le corps, 8-9 slides.
 3. Écrire `tools/post_<slug>.py` sur le modèle de `post_5etoiles.py` / `post_attentes.py` (catégorie : actu / conseil / vie), l'exécuter : il écrit le canevas (`carrousel-<slug>/project/`) et les PNG (`png-<slug>/`). Assembler une planche de contrôle (voir le bloc Pillow en bas des exemples) et corriger les débordements.
-4. Copier les PNG dans `<slug>-AAAA-MM/`, mettre le calendrier à l'état « programmé » avec le slug, commit + push. Les images deviennent publiques à `https://raw.githubusercontent.com/geoffroybag/otizi-social-assets/<sha>/<slug>-AAAA-MM/slide-NN.png`.
+4. Copier les PNG dans `<slug>-AAAA-MM/`, déplacer les sujets du Stock vers « Programmés » (date, état `programmé`, slug), commit + push. Les images deviennent publiques à `https://raw.githubusercontent.com/geoffroybag/otizi-social-assets/<sha>/<slug>-AAAA-MM/slide-NN.png`.
 5. Envoyer à Geoffroy (push Ozi) les planches et un récapitulatif : dates, titres, sources, points à vérifier.
 
 ## Metricool depuis Claude Code (fonctionne sur le plan Free)
