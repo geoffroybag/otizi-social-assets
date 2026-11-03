@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Carrousel « Vie d'hôte » : ce que les voyageurs regardent vraiment avant de réserver (OnePoll pour Booking, nov. 2025)."""
-import sys, json
-sys.path.insert(0, "/tmp/claude-0/-home-claude/fc645d01-7205-5ab5-8091-97d967632241/scratchpad")
+import os, sys, json
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from carrousel_lib import *
 
-S = "/tmp/claude-0/-home-claude/fc645d01-7205-5ab5-8091-97d967632241/scratchpad"
-PROJ = S + "/carrousel-attentes/project"
+PROJ = work_dir("attentes", "project")
 N = 8
 SRC = "Source : OnePoll pour Booking.com, 2 000 Français, nov. 2025"
 slides = {}
@@ -122,5 +121,5 @@ order = list(slides.keys())
 titles = ["1 · Couverture", "2 · 5 critères", "3 · Emplacement", "4 · Photos", "5 · Pièce par pièce", "6 · Jardin", "7 · Déco", "8 · À retenir"]
 write_all(slides, PROJ)
 json.dump(canvas_json("Carrousel attentes voyageurs", order, titles), open(PROJ + "/canvas.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-render_all(PROJ, order, S + "/png-attentes")
+render_all(PROJ, order, work_dir("attentes", "png"))
 print("ok", len(order))

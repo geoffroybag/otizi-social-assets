@@ -2,7 +2,7 @@
 """Carrousel Airbnb — style « Otizi décrypte » : couverture expressive, pages intérieures sobres."""
 import html, os
 
-OUT = "/tmp/claude-0/-home-claude/fc645d01-7205-5ab5-8091-97d967632241/scratchpad/carrousel-airbnb/project"
+OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "work", "carrousel-airbnb", "project")
 GROUND, ACCENT = "{{ground}}", "{{accent}}"
 VIOLET = "#472ed8"
 CARD = VIOLET            # carte d'accent : violet, texte blanc

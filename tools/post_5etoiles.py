@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Carrousel « Conseil » : les 5 détails qui font une note 5 étoiles."""
-import sys, json
-sys.path.insert(0, "/tmp/claude-0/-home-claude/fc645d01-7205-5ab5-8091-97d967632241/scratchpad")
+import os, sys, json
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from carrousel_lib import *
 
-S = "/tmp/claude-0/-home-claude/fc645d01-7205-5ab5-8091-97d967632241/scratchpad"
-PROJ = S + "/carrousel-5etoiles/project"
+PROJ = work_dir("5etoiles", "project")
 N = 8
 slides = {}
 F = "Conseil · gîtes et chambres d'hôtes"
@@ -103,5 +102,5 @@ order = list(slides.keys())
 titles = ["1 · Couverture", "2 · Pourquoi", "3 · Literie", "4 · Propreté", "5 · Wi-Fi", "6 · Arrivée", "7 · Attention", "8 · À éviter"]
 write_all(slides, PROJ)
 json.dump(canvas_json("Carrousel 5 étoiles", order, titles), open(PROJ + "/canvas.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-render_all(PROJ, order, S + "/png-5etoiles")
+render_all(PROJ, order, work_dir("5etoiles", "png"))
 print("ok", len(order))

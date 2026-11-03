@@ -1,6 +1,28 @@
 #!/usr/bin/env python3
 """Carrousel Airbnb — style « Otizi décrypte » : couverture expressive, pages intérieures sobres."""
-import html, os
+import html, os, shutil
+
+# Racine du dépôt (ce fichier est dans tools/), police et dossier de travail.
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FONT_DIR = os.path.join(REPO, "tools", "fonts", "figtree", "fonts", "ttf")
+WORK = os.path.join(REPO, "work")
+
+def chrome_command():
+    """Navigateur headless : variable OTIZI_CHROME, sinon le premier trouvé dans le PATH."""
+    env = os.environ.get("OTIZI_CHROME")
+    if env:
+        return env.split()
+    for name in ("google-chrome", "google-chrome-stable", "chromium", "chromium-browser"):
+        found = shutil.which(name)
+        if found:
+            return [found]
+    raise RuntimeError("Aucun navigateur headless : installez google-chrome ou chromium, ou renseignez OTIZI_CHROME.")
+
+def work_dir(slug, kind):
+    """Dossier de sortie d'un carrousel : work/carrousel-<slug>/project ou work/png-<slug>."""
+    if kind == "project":
+        return os.path.join(WORK, f"carrousel-{slug}", "project")
+    return os.path.join(WORK, f"png-{slug}")
 
 GROUND, ACCENT = "{{ground}}", "{{accent}}"
 VIOLET = "#472ed8"
@@ -161,7 +183,7 @@ def write_all(slides, outdir):
 
 def render_all(project_dir, order, png_dir, prefix="slide"):
     import re, subprocess
-    fontdir = "/tmp/claude-0/-home-claude/fc645d01-7205-5ab5-8091-97d967632241/scratchpad/fonts/figtree/fonts/ttf"
+    fontdir = FONT_DIR
     fontcss = "".join(f"@font-face{{font-family:'Figtree';src:url('file://{fontdir}/Figtree-{n}.ttf');font-weight:{w}}}" for n, w in [("Medium",500),("Bold",700),("Black",900)])
     os.makedirs(png_dir, exist_ok=True)
     tmp = os.path.join(png_dir, "_html"); os.makedirs(tmp, exist_ok=True)
@@ -171,7 +193,7 @@ def render_all(project_dir, order, png_dir, prefix="slide"):
         body = re.sub(r"<helmet>.*?</helmet>", "", body, flags=re.S).replace("{{ground}}", "#EDF4FE").replace("{{accent}}", "#00e2ae")
         hp = os.path.join(tmp, f"{i:02d}.html")
         open(hp, "w", encoding="utf-8").write(f"<!doctype html><html lang='fr'><head><meta charset='utf-8'><style>{fontcss}html,body{{margin:0;background:#EDF4FE}}</style></head><body>{body}</body></html>")
-        subprocess.run(["google-chrome","--headless=new","--no-sandbox","--disable-gpu","--hide-scrollbars","--window-size=1080,1350",f"--screenshot={png_dir}/{prefix}-{i:02d}.png",f"file://{hp}"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run([*chrome_command(),"--headless=new","--no-sandbox","--disable-gpu","--hide-scrollbars","--window-size=1080,1350",f"--screenshot={png_dir}/{prefix}-{i:02d}.png",f"file://{hp}"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def canvas_json(title, order, titles):
     boards = {}
