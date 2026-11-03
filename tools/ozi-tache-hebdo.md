@@ -18,12 +18,22 @@ Spécification pour une tâche automatique sur le VPS d'Ozi. Rythme : chaque lun
 4. Copier les PNG dans `<slug>-AAAA-MM/`, mettre le calendrier à l'état « préparé » avec le slug, commit + push. Les images deviennent publiques à `https://raw.githubusercontent.com/geoffroybag/otizi-social-assets/<sha>/<slug>-AAAA-MM/slide-NN.png`.
 5. Envoyer à Geoffroy (push Ozi) les planches et un récapitulatif : dates, titres, sources, points à vérifier.
 
-## Metricool : attention au plan
+## Metricool depuis Claude Code (fonctionne sur le plan Free)
 
-L'API Metricool (`POST https://app.metricool.com/api/v2/scheduler/posts?blogId=7842510&userId=…`, en-tête `X-Mc-Auth`, body : `publicationDate{dateTime,timezone}`, `text`, `providers[{network:"instagram"}]`, `instagramData{type:"POST"}`, `draft`, médias normalisés via `GET /api/actions/normalize/image/url?url=…` puis `media:{mediaId}`) n'est ouverte qu'aux plans **Advanced et Custom**. Sur le plan Free, Ozi ne peut pas programmer les posts lui-même.
+L'API REST Metricool est réservée aux plans Advanced/Custom, mais le **serveur MCP Metricool** (celui qu'utilise Claude) fonctionne sur le plan Free. Comme Ozi passe par Claude Code, il suffit de l'ajouter une fois, sous l'utilisateur qui exécute Ozi :
 
-Deux options tant que le compte est en Free :
-- **Manuel** : Geoffroy crée les posts dans Metricool à partir des PNG du dépôt et des légendes que la tâche écrit dans `<slug>-AAAA-MM/legende.txt`.
-- **Via Claude** : le connecteur Metricool de Claude fonctionne sur le plan Free ; un réveil hebdomadaire dans la conversation Claude lit le dépôt (sujets à l'état « préparé »), crée les brouillons Metricool et passe l'état à « programmé » une fois validé.
+```
+claude mcp add --transport http metricool https://ai.metricool.com/mcp
+```
 
-Si le compte passe en Advanced : ajouter le token dans les secrets d'Ozi et faire l'étape Metricool directement depuis la tâche (toujours en `draft: true`).
+Puis, dans une session Claude Code interactive, `/mcp` → Metricool → s'authentifier (OAuth : l'URL s'ouvre ou se copie dans un navigateur, connexion avec le compte Metricool otizi.app@gmail.com). Le jeton est ensuite rafraîchi automatiquement. À vérifier avec `claude mcp list` (Metricool « connected »).
+
+Outils disponibles ensuite : `getBrandSettings` (marque Otizi, `blogId` 7842510), `createScheduledPost`, `getScheduledPosts`, `updateScheduledPost`, `getBestTimeToPostByNetwork`. Structure du post : voir `tache-hebdo.md`, étape 5 (toujours `draft: true` ; médias = URL publiques raw.githubusercontent.com ; alt-texts ; légende 3 paragraphes, 5 hashtags max).
+
+Prérequis Claude Code côté VPS : `WebSearch` activé (vérification des chiffres), Chrome/Chromium headless pour le rendu, Pillow, accès push au dépôt. Lancer la tâche en mode non interactif, par exemple :
+
+```
+claude -p "$(cat tools/tache-hebdo.md)" --allowedTools "Bash,Read,Write,Edit,WebSearch,WebFetch,mcp__metricool__*"
+```
+
+(adapter le nom du serveur MCP et la politique d'autorisations à la configuration d'Ozi ; le compte rendu final est renvoyé par Ozi en push.)
