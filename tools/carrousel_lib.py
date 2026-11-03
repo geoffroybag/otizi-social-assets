@@ -193,7 +193,14 @@ def render_all(project_dir, order, png_dir, prefix="slide"):
         body = re.sub(r"<helmet>.*?</helmet>", "", body, flags=re.S).replace("{{ground}}", "#EDF4FE").replace("{{accent}}", "#00e2ae")
         hp = os.path.join(tmp, f"{i:02d}.html")
         open(hp, "w", encoding="utf-8").write(f"<!doctype html><html lang='fr'><head><meta charset='utf-8'><style>{fontcss}html,body{{margin:0;background:#EDF4FE}}</style></head><body>{body}</body></html>")
-        subprocess.run([*chrome_command(),"--headless=new","--no-sandbox","--disable-gpu","--hide-scrollbars","--window-size=1080,1350",f"--screenshot={png_dir}/{prefix}-{i:02d}.png",f"file://{hp}"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        out = f"{png_dir}/{prefix}-{i:02d}.png"
+        # Fenêtre plus haute que la slide : selon le navigateur, --window-size inclut la barre de la fenêtre
+        # (Chromium Playwright : ~90 px perdus en bas), puis recadrage exact à 1080×1350.
+        subprocess.run([*chrome_command(),"--headless=new","--no-sandbox","--disable-gpu","--hide-scrollbars","--window-size=1080,1500",f"--screenshot={out}",f"file://{hp}"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        from PIL import Image
+        im = Image.open(out)
+        if im.size != (1080, 1350):
+            im.crop((0, 0, 1080, 1350)).save(out, optimize=True)
 
 def canvas_json(title, order, titles):
     boards = {}
