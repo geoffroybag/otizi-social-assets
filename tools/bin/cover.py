@@ -1,20 +1,39 @@
 #!/usr/bin/env python3
-"""Image de couverture d'article de blog (1600×900, WebP) à partir de la couverture d'un carrousel.
+"""Image de couverture d'article de blog (1600×900, WebP).
 
 Usage : python3 tools/bin/cover.py <slug> <sortie.webp>
-Rend la slide 1 (work/carrousel-<slug>/project/Main.dc.html) à l'échelle 2 avec le même
-Chrome que les slides, découpe une bande 16:9 autour du titre, et enregistre en WebP.
+Si une photo a été choisie pour le carrousel (tools/bin/photo.py get <slug> …, fichier
+work/photos/<slug>.jpg), la couverture est cette photo recadrée en 16:9. Sinon, rend la slide 1
+(work/carrousel-<slug>/project/Main.dc.html) à l'échelle 2 et découpe une bande 16:9 autour du titre.
 """
 import os, re, subprocess, sys
 from PIL import Image
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-from carrousel_lib import FONT_DIR, WORK, chrome_command  # noqa: E402
+from carrousel_lib import FONT_DIR, WORK, chrome_command, photo  # noqa: E402
 
 # Bande gardée dans la slide (hauteur 1350) : sous le wordmark, titre et sous-titre, avant la courbe du bas.
 BAND_TOP, BAND_HEIGHT = 230, 608  # 1080×608 = 16:9
 
+def save_webp(im, out):
+    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
+    im.save(out, "WEBP", quality=85, method=6)
+    return out
+
+def cover_from_photo(p, out):
+    """Recadrage centré de la photo en 16:9, puis 1600×900."""
+    im = Image.open(p["path"]).convert("RGB")
+    w, h = im.size
+    if w / h > 16 / 9:
+        nw = int(h * 16 / 9); box = ((w - nw) // 2, 0, (w - nw) // 2 + nw, h)
+    else:
+        nh = int(w * 9 / 16); box = (0, (h - nh) // 2, w, (h - nh) // 2 + nh)
+    return save_webp(im.crop(box).resize((1600, 900), Image.LANCZOS), out)
+
 def cover(slug, out):
+    p = photo(slug)
+    if p:
+        return cover_from_photo(p, out)
     project = os.path.join(WORK, f"carrousel-{slug}", "project")
     src = os.path.join(project, "Main.dc.html")
     if not os.path.exists(src):
@@ -33,10 +52,7 @@ def cover(slug, out):
     im = Image.open(png).convert("RGB")
     scale = im.size[0] / 1080
     band = im.crop((0, int(BAND_TOP * scale), im.size[0], int((BAND_TOP + BAND_HEIGHT) * scale)))
-    band = band.resize((1600, 900), Image.LANCZOS)
-    os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
-    band.save(out, "WEBP", quality=85, method=6)
-    return out
+    return save_webp(band.resize((1600, 900), Image.LANCZOS), out)
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:

@@ -175,6 +175,86 @@ def bar(label, pct, maxpct=70):
             f'<div style="display: flex; justify-content: space-between; font-size: 28px; font-weight: 700; color: {BODY}"><span>{label}</span><span style="color: {VIOLET}; font-weight: 900">{pct} %</span></div>'
             f'<div style="height: 18px; border-radius: 9px; background: #FFFFFF; border: 2px solid {LINE}; overflow: hidden"><div style="width: {w}px; height: 100%; background: {VIOLET}"></div></div></div>')
 
+# ---------- photo de couverture (tools/bin/photo.py) ----------
+def photo(slug):
+    """Photo choisie pour le carrousel (work/photos/<slug>.json écrit par tools/bin/photo.py get), ou None."""
+    import json
+    meta = os.path.join(WORK, "photos", f"{slug}.json")
+    if not os.path.exists(meta):
+        return None
+    p = json.load(open(meta, encoding="utf-8"))
+    p["path"] = os.path.join(WORK, "photos", f"{slug}.jpg")
+    return p if os.path.exists(p["path"]) else None
+
+def photo_credit(p):
+    """Ligne de crédit à mettre en fin de légende Instagram et d'article : « Photo : Prénom Nom · Unsplash »."""
+    return f"Photo : {p['photographer']} · {p.get('source', 'Unsplash')}" if p else ""
+
+def photo_block(p, height=440, credit=False):
+    """Bloc photo de la slide 1 : image en couverture, coins arrondis. Le crédit va dans la légende du post
+    (photo_credit), pas sur la slide, sauf credit=True. Rend une chaîne vide sans photo."""
+    if not p:
+        return ""
+    chip = ""
+    if credit:
+        chip = (f'<div style="position: absolute; right: 16px; bottom: 14px; background: rgba(10,10,10,0.55); color: #FFFFFF; font-size: 20px; font-weight: 700; '
+                f'padding: 6px 14px; border-radius: 999px">{html.escape(photo_credit(p))}</div>')
+    return (f'<div style="position: relative; width: 100%; height: {height}px; border-radius: 28px; overflow: hidden; flex-shrink: 0; '
+            f'background: url(\'file://{p["path"]}\') center / cover no-repeat; border: 2px solid {LINE}" role="img" aria-label="{html.escape(p.get("alt") or "")}">{chip}</div>')
+
+def photo_cover(p, category, kind, text, title="Couverture", counter="", size=58, accent_words=None):
+    """Couverture « plein écran » (format HugoDécrypte) : la photo remplit la slide, dégradé sombre en bas,
+    wordmark en haut à gauche, pastille de catégorie blanche, texte blanc en gras, flèche en bas à droite.
+    text : une à trois phrases (4 à 6 lignes au plus à 58 px). accent_words : mots mis en menthe (ex. ["21,2 %"])."""
+    if not p:
+        raise ValueError("photo_cover demande une photo (tools/bin/photo.py get <slug> <id>)")
+    body = html.escape(text)
+    for w in accent_words or []:
+        body = body.replace(html.escape(w), f'<span style="color: {ACCENT}">{html.escape(w)}</span>')
+    pill_fg = {"actu": VIOLET, "conseil": VIOLET, "vie": INK}[kind]
+    dot = {"actu": VIOLET, "conseil": "#FFFFFF", "vie": ACCENT}[kind]
+    pill = (f'<div style="display: inline-flex; align-items: center; gap: 12px; background: #FFFFFF; color: {pill_fg}; font-size: 28px; font-weight: 900; '
+            f'letter-spacing: 0.06em; text-transform: uppercase; padding: 12px 24px; border-radius: 16px; align-self: flex-start">'
+            f'<span style="width: 18px; height: 18px; border-radius: 50%; background: {dot}; border: 3px solid {VIOLET}; display: inline-block"></span>{html.escape(category)}</div>')
+    cnt = f'<div style="background: rgba(10,10,10,0.6); color: #FFFFFF; font-size: 28px; font-weight: 700; padding: 10px 20px; border-radius: 999px">{counter}</div>' if counter else ""
+    return f"""<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>{html.escape(title)}</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;900&amp;display=swap">
+<style>body{{margin:0}}</style>
+</helmet>
+<div style="width: 1080px; height: 1350px; box-sizing: border-box; position: relative; overflow: hidden; font-family: 'Figtree', Arial, sans-serif; background: #0a0a0a url('file://{p["path"]}') center / cover no-repeat" role="img" aria-label="{html.escape(p.get("alt") or "")}">
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,20,0.30) 0%, rgba(10,10,20,0) 18%, rgba(10,10,20,0) 36%, rgba(10,10,20,0.45) 50%, rgba(10,10,20,0.80) 62%, rgba(10,10,20,0.93) 75%, rgba(10,10,20,0.97) 100%)"></div>
+  <div style="position: absolute; top: 56px; left: 64px; right: 64px; display: flex; justify-content: space-between; align-items: center">
+    <div style="display: flex; align-items: center; gap: 12px"><div style="font-size: 44px; font-weight: 900; letter-spacing: -0.02em; color: #FFFFFF; line-height: 1">Otizi</div>
+      <div style="background: {ACCENT}; color: {INK}; font-size: 32px; font-weight: 900; line-height: 1; padding: 8px 16px 11px; border-radius: 14px">décrypte</div></div>
+    {cnt}
+  </div>
+  <div style="position: absolute; left: 64px; right: 64px; bottom: 64px; display: flex; flex-direction: column; gap: 30px">
+    {pill}
+    <p style="margin: 0; font-size: {size}px; line-height: 1.22; font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em; padding-right: 40px">{body}</p>
+  </div>
+  <div style="position: absolute; right: 40px; bottom: 40px; width: 64px; height: 64px; border-radius: 16px; background: #FFFFFF; color: {INK}; display: flex; align-items: center; justify-content: center">{icon("arrow", 34)}</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{{"ground":{{"editor":"color","default":"#EDF4FE","section":"Charte"}},"accent":{{"editor":"color","default":"#00e2ae","section":"Charte"}},"$preview":{{"width":1080,"height":1350}}}}'>
+class Component extends DCLogic {{
+  renderVals() {{
+    return {{ ground: this.props.ground ?? '#EDF4FE', accent: this.props.accent ?? '#00e2ae' }};
+  }}
+}}
+</script>
+</body>
+</html>
+"""
+
 def write_all(slides, outdir):
     os.makedirs(outdir, exist_ok=True)
     for name, src in slides.items():

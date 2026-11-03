@@ -5,7 +5,7 @@ Familles : **Actu** (réglementation, plateformes), **Conseil** (métier, applic
 
 Deux listes, à tenir à jour à chaque passage :
 
-- **Programmés** : les carrousels datés, état `programmé` (dans Metricool, à relire avant publication) ou `publié`.
+- **Programmés** : les carrousels datés, état `programmé` (dans Metricool, à relire avant publication), `publié`, ou `à refaire` (carrousel déjà rédigé dans le dépôt mais absent de Metricool : la tâche le régénère, avec photo, et le reprogramme à sa date avant de prendre des sujets dans le stock).
 - **Stock** : les sujets à venir, sans date, dans l'ordre d'intérêt. Le vendredi, la tâche en pioche trois pour la semaine suivante (un sujet daté se place sur la bonne semaine, voir la colonne « Quand »), puis réapprovisionne le stock par une recherche web s'il tombe sous six sujets (entrées marquées « proposé le JJ/MM » dans Notes, à valider ou retirer par Geoffroy).
 
 Ce fichier se lit aussi sur la page État d'Ozi (bloc « Carrousels Instagram ») et se modifie sur GitHub.
@@ -15,11 +15,11 @@ Ce fichier se lit aussi sur la page État d'Ozi (bloc « Carrousels Instagram »
 | Date | Famille | Sujet | État | Notes |
 |---|---|---|---|---|
 | mar 3 nov 2026 | Actu | Airbnb interdit les corvées de départ (règles du 20 nov.) | publié | https://www.instagram.com/p/DfRvIiSG77Q/ |
-| mer 5 nov 2026 | Conseil | Les 5 détails qui font une note 5 étoiles | programmé | Metricool uuid 8994072272572206956 |
-| ven 7 nov 2026 | Vie d'hôte | Ce que les voyageurs regardent avant de réserver (OnePoll/Booking) | programmé | Metricool uuid -860488549483657277 |
-| lun 9 nov 2026 | Actu | Chambres d'hôtes : 21,2 % de cotisations, le choc 2026 | programmé | brouillon Metricool à valider ; `cotisations-2026-11/`, `tools/post_cotisations.py` ; sources : Compta Online (taux 2026), The Connexion (23 déc. 2025), QE n° 6664, MySweetimmo (9 oct. 2026) ; https://app.metricool.com/planner/calendar?blogId=7842510&openWithPostUuid=7056038149750214493 |
-| mer 11 nov 2026 | Conseil | Basse saison : 6 façons de remplir novembre | programmé | brouillon Metricool à valider ; `basse-saison-2026-11/`, `tools/post_basse_saison.py` ; sans chiffre (aucune donnée sourcée) ; 11 nov. férié ; https://app.metricool.com/planner/calendar?blogId=7842510&openWithPostUuid=661370869257751063 |
-| ven 13 nov 2026 | Vie d'hôte | Le petit-déjeuner qui fait parler (chambres d'hôtes) | programmé | brouillon Metricool à valider ; `petit-dejeuner-2026-11/`, `tools/post_petit_dejeuner.py` ; sources : Code du tourisme art. D. 324-13, règlement (UE) 1169/2011, décret 2015-447 ; https://app.metricool.com/planner/calendar?blogId=7842510&openWithPostUuid=361531505028449145 |
+| mer 5 nov 2026 | Conseil | Les 5 détails qui font une note 5 étoiles | à refaire | posts Metricool supprimés le 3 nov. : régénérer avec photo et reprogrammer |
+| ven 7 nov 2026 | Vie d'hôte | Ce que les voyageurs regardent avant de réserver (OnePoll/Booking) | à refaire | posts Metricool supprimés le 3 nov. : régénérer avec photo et reprogrammer |
+| lun 9 nov 2026 | Actu | Chambres d'hôtes : 21,2 % de cotisations, le choc 2026 | à refaire | posts Metricool supprimés le 3 nov. : régénérer avec photo et reprogrammer ; `cotisations-2026-11/`, `tools/post_cotisations.py` ; sources : Compta Online (taux 2026), The Connexion (23 déc. 2025), QE n° 6664, MySweetimmo (9 oct. 2026) |
+| mer 11 nov 2026 | Conseil | Basse saison : 6 façons de remplir novembre | à refaire | posts Metricool supprimés le 3 nov. : régénérer avec photo et reprogrammer ; `basse-saison-2026-11/`, `tools/post_basse_saison.py` ; sans chiffre (aucune donnée sourcée) ; 11 nov. férié |
+| ven 13 nov 2026 | Vie d'hôte | Le petit-déjeuner qui fait parler (chambres d'hôtes) | à refaire | posts Metricool supprimés le 3 nov. : régénérer avec photo et reprogrammer ; `petit-dejeuner-2026-11/`, `tools/post_petit_dejeuner.py` ; sources : Code du tourisme art. D. 324-13, règlement (UE) 1169/2011, décret 2015-447 |
 
 ## Stock
 

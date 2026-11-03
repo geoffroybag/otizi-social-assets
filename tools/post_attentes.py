@@ -11,6 +11,7 @@ slides = {}
 
 slides["Main.dc.html"] = page("Couverture", category_pill("Vie d'hôte", "vie"),
     f"""
+    {photo_block(photo("attentes"))}
     {title_boxes([("Ce que les", "white", 84), ("voyageurs regardent", "mint", 66), ("avant de réserver", "white", 76)])}
     <div>{para("Une enquête auprès de 2 000 Français partant en vacances. Les chiffres bousculent quelques idées reçues sur ce qui fait réserver.", 38, BODY, maxw=860)}
       <div style="width: 260px; height: 10px; border-radius: 5px; background: {ACCENT}; margin-top: 18px"></div></div>
