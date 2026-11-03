@@ -11,6 +11,7 @@ F = "Conseil · gîtes et chambres d'hôtes"
 
 slides["Main.dc.html"] = page("Couverture", category_pill("Conseil", "conseil"),
     f"""
+    {photo_block(photo("5etoiles"))}
     {title_boxes([("Les 5 détails", "white", 96), ("qui font", "mint", 104), ("une note 5 étoiles", "white", 76)])}
     <div>{para("Et les 3 qui vous en coûtent une à coup sûr. Check-list à faire avant la prochaine arrivée.", 38, BODY, maxw=860)}
       <div style="width: 260px; height: 10px; border-radius: 5px; background: {ACCENT}; margin-top: 18px"></div></div>

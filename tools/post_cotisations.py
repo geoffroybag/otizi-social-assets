@@ -14,6 +14,7 @@ slides = {}
 
 slides["Main.dc.html"] = page("Couverture", category_pill("Actu", "actu"),
     f"""
+    {photo_block(photo("cotisations"))}
     {title_boxes([("Chambres d'hôtes :", "white", 72), ("21,2 % de", "mint", 112), ("cotisations", "white", 92)])}
     <div>{para("Depuis le 1er janvier 2026, les cotisations sociales des chambres d'hôtes en micro-entreprise ont presque doublé. Ce qui a changé, qui est concerné, et ce que le budget 2027 pourrait corriger.", 36, BODY, maxw=860)}
       <div style="width: 260px; height: 10px; border-radius: 5px; background: {ACCENT}; margin-top: 18px"></div></div>

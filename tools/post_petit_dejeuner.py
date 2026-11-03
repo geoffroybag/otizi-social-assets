@@ -12,6 +12,7 @@ slides = {}
 
 slides["Main.dc.html"] = page("Couverture", category_pill("Vie d'hôte", "vie"),
     f"""
+    {photo_block(photo("petit-dejeuner"))}
     {title_boxes([("Chambres d'hôtes :", "white", 70), ("le petit-déjeuner", "mint", 74), ("qui fait parler", "white", 86)])}
     <div>{para("C'est la moitié de ce que le voyageur achète, et souvent la moitié de l'avis qu'il laisse. Produits locaux, mise en scène, allergies, coût réel : ce qui se joue sur la table du matin.", 36, BODY, maxw=860)}
       <div style="width: 260px; height: 10px; border-radius: 5px; background: {ACCENT}; margin-top: 18px"></div></div>

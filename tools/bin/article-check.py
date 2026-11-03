@@ -52,6 +52,13 @@ def main(path):
     if "Article à visée d'information" not in body:
         fail("ligne finale « _Article à visée d'information. Références : …_ » absente")
     slug = os.path.splitext(os.path.basename(path))[0]
+    photos = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "work", "photos")
+    meta = os.path.join(photos, f"{slug}.json")
+    if os.path.exists(meta):
+        import json
+        bank = json.load(open(meta, encoding="utf-8")).get("source", "Unsplash")
+        if bank not in body:
+            fail(f"photo {bank} choisie pour {slug} mais crédit absent de la ligne finale (« Photo de couverture : [Nom](lien) sur {bank} »)")
     try:
         with urllib.request.urlopen(f"https://otizi.fr/blog/{slug}", timeout=10) as r:
             if r.status == 200 and "nuxt-content" in r.read().decode("utf-8", "ignore"):

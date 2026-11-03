@@ -10,6 +10,7 @@ slides = {}
 
 slides["Main.dc.html"] = page("Couverture", category_pill("Conseil", "conseil"),
     f"""
+    {photo_block(photo("basse-saison"))}
     {title_boxes([("Basse saison :", "white", 80), ("6 façons", "mint", 112), ("de remplir novembre", "white", 68)])}
     <div>{para("Le calendrier se vide, les charges restent. Six leviers concrets, à activer cette semaine, sans brader vos tarifs.", 38, BODY, maxw=860)}
       <div style="width: 260px; height: 10px; border-radius: 5px; background: {ACCENT}; margin-top: 18px"></div></div>
