@@ -11,7 +11,7 @@ Génération des carrousels Instagram (1080×1350) dans la charte Otizi, à part
 - `calendrier-editorial.md` : table « Programmés » (carrousels datés, `programmé` / `publié`) et table « Stock » (sujets à venir, sans date, réapprovisionné par la tâche quand il passe sous six). Lisible sur la page État d'Ozi, modifiable sur GitHub.
 - La police Figtree vient de `https://github.com/erikdkennedy/figtree` : `git clone --depth 1 https://github.com/erikdkennedy/figtree.git tools/fonts/figtree` (ignoré par git), trouvée automatiquement par `carrousel_lib.py`.
 - `carrousel_lib.py` rend dans `work/` (ignoré par git) : `work_dir("<slug>", "project")` et `work_dir("<slug>", "png")` ; navigateur headless : `OTIZI_CHROME` ou `google-chrome`/`chromium` dans le PATH.
-- `bin/planche.py <slug>` : planche de contrôle (toutes les slides) dans `work/planches/<slug>.png`. `bin/run-hebdo.sh` : lancement de la tâche hebdo sur le VPS (voir `ozi-tache-hebdo.md`).
+- `bin/planche.py <slug>` : planche de contrôle (toutes les slides) dans `work/planches/<slug>.png`. `bin/cover.py <slug> <sortie.webp>` : couverture d'article de blog 1600×900 tirée de la slide 1. `bin/article-check.py <article.md>` : contrôle d'un article avant la PR. `bin/gh-ozi.sh` : `gh` avec le jeton d'Ozi. `bin/run-hebdo.sh` : lancement de la tâche hebdo sur le VPS (voir `ozi-tache-hebdo.md`).
 
 ## Charte
 
@@ -25,4 +25,5 @@ Génération des carrousels Instagram (1080×1350) dans la charte Otizi, à part
 1. Le vendredi à 15h : lire `calendrier-editorial.md`, piocher trois sujets du Stock pour la semaine suivante ; réapprovisionner le stock par une recherche web s'il tombe sous six.
 2. Pour chaque sujet : vérifier l'actualité et les chiffres (recherche web), écrire `post_<slug>.py`, générer, contrôler la planche, pousser les PNG dans `<slug>-AAAA-MM/`.
 3. Programmer les posts dans Metricool (marque Otizi, `blogId` 7842510, fuseau Europe/Paris) : lundi, mercredi, vendredi de la semaine suivante à 12h15, images par URL `raw.githubusercontent.com/geoffroybag/otizi-social-assets/<commit>/<dossier>/slide-NN.png`, légende + alt-texts, programmés (`draft: false`) : Geoffroy relit dans Metricool avant le lundi.
-4. Mettre à jour le calendrier (état, liens) et envoyer la planche de contrôle à Geoffroy.
+4. Un article de blog par carrousel sur otizi.fr (dépôt `vr-admin-website`, PR vers `develop`), la légende Instagram y renvoie.
+5. Mettre à jour le calendrier (état, liens) et envoyer la planche de contrôle à Geoffroy.
