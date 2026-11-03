@@ -2,7 +2,7 @@
 # Lancement de la tâche « Otizi décrypte — carrousels hebdo » sur le VPS.
 #
 #   tools/bin/run-hebdo.sh            # lancement à la main (mode « manual »)
-#   tools/bin/run-hebdo.sh --cron     # cron du lundi : ne tourne que s'il est 7h à Paris
+#   tools/bin/run-hebdo.sh --cron     # cron du vendredi : ne tourne que s'il est 15h à Paris
 #                                     # et si la routine est active dans Ozi (page État)
 #   tools/bin/run-hebdo.sh --poll     # cron toutes les 2 min : lance si « Lancer maintenant »
 #                                     # a été demandé sur la page État d'Ozi, sinon sort
@@ -52,9 +52,9 @@ if [ "$MODE" = "test" ] && [ -f work/consigne-test.md ]; then
 fi
 if [ "$MODE_FLAG" = "--dry" ]; then printf '%s\n' "$PROMPT"; exit 0; fi
 
-# --- cron du lundi : seulement à 7h Paris (le cron est en UTC : appels à 5h et 6h UTC), et si Ozi dit que la routine est active
+# --- cron du vendredi : seulement à 15h Paris (le cron est en UTC : appels à 13h et 14h UTC), et si Ozi dit que la routine est active
 if [ "$MODE" = "cron" ]; then
-  [ "$(TZ=Europe/Paris date +%H)" = "07" ] || exit 0
+  [ "$(TZ=Europe/Paris date +%H)" = "15" ] || exit 0
   if [ -n "$AGENT_SECRET" ] && [ "$(ozi_get)" = "200" ] && [ "$(field enabled)" = "false" ]; then
     printf '%s routine désactivée sur la page État : pas de lancement.\n' "$(date '+%F %T')" >> work/logs/cron.log
     exit 0

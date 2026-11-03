@@ -22,7 +22,7 @@ Génération des carrousels Instagram (1080×1350) dans la charte Otizi, à part
 
 ## Procédure hebdomadaire
 
-1. Lire `calendrier-editorial.md`, prendre les trois sujets de la semaine.
+1. Le vendredi à 15h : lire `calendrier-editorial.md`, prendre les trois sujets de la semaine suivante.
 2. Pour chaque sujet : vérifier l'actualité et les chiffres (recherche web), écrire `post_<slug>.py`, générer, contrôler la planche, pousser les PNG dans `<slug>-AAAA-MM/`.
-3. Créer les posts dans Metricool (marque Otizi, `blogId` 7842510, fuseau Europe/Paris) : lundi, mercredi, vendredi à 12h15, images par URL `raw.githubusercontent.com/geoffroybag/otizi-social-assets/<commit>/<dossier>/slide-NN.png`, légende + alt-texts, **en brouillon** (`draft: true`) tant que Geoffroy n'a pas validé.
+3. Programmer les posts dans Metricool (marque Otizi, `blogId` 7842510, fuseau Europe/Paris) : lundi, mercredi, vendredi de la semaine suivante à 12h15, images par URL `raw.githubusercontent.com/geoffroybag/otizi-social-assets/<commit>/<dossier>/slide-NN.png`, légende + alt-texts, programmés (`draft: false`) : Geoffroy relit dans Metricool avant le lundi.
 4. Mettre à jour le calendrier (état, liens) et envoyer la planche de contrôle à Geoffroy.
