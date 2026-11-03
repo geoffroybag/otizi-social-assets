@@ -25,5 +25,5 @@ Génération des carrousels Instagram (1080×1350) dans la charte Otizi, à part
 1. Le vendredi à 15h : lire `calendrier-editorial.md`, piocher trois sujets du Stock pour la semaine suivante ; réapprovisionner le stock par une recherche web s'il tombe sous six.
 2. Pour chaque sujet : vérifier l'actualité et les chiffres (recherche web), écrire `post_<slug>.py`, générer, contrôler la planche, pousser les PNG dans `<slug>-AAAA-MM/`.
 3. Programmer les posts dans Metricool (marque Otizi, `blogId` 7842510, fuseau Europe/Paris) : lundi, mercredi, vendredi de la semaine suivante à 12h15, images par URL `raw.githubusercontent.com/geoffroybag/otizi-social-assets/<commit>/<dossier>/slide-NN.png`, légende + alt-texts, programmés (`draft: false`) : Geoffroy relit dans Metricool avant le lundi.
-4. Un article de blog par carrousel sur otizi.fr (dépôt `vr-admin-website`, PR vers `develop`), la légende Instagram y renvoie.
+4. Un article de blog par carrousel sur otizi.fr (dépôt `vr-admin-website`, commit sur `master`, déploiement automatique par GitHub Action, puis `master` fusionné dans `develop`), la légende Instagram y renvoie.
 5. Mettre à jour le calendrier (état, liens) et envoyer la planche de contrôle à Geoffroy.
