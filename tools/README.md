@@ -9,7 +9,9 @@ Génération des carrousels Instagram (1080×1350) dans la charte Otizi, à part
   - `carrousel-<slug>/project/*.dc.html` + `canvas.json` (format du canevas Design de Claude),
   - `png-<slug>/slide-NN.png` (images prêtes pour Instagram).
 - `calendrier-editorial.md` : sujets validés, planning, état (à faire / préparé / publié).
-- La police Figtree vient de `https://github.com/erikdkennedy/figtree` (dossier `fonts/ttf`), à cloner à côté avant le rendu.
+- La police Figtree vient de `https://github.com/erikdkennedy/figtree` : `git clone --depth 1 https://github.com/erikdkennedy/figtree.git tools/fonts/figtree` (ignoré par git), trouvée automatiquement par `carrousel_lib.py`.
+- `carrousel_lib.py` rend dans `work/` (ignoré par git) : `work_dir("<slug>", "project")` et `work_dir("<slug>", "png")` ; navigateur headless : `OTIZI_CHROME` ou `google-chrome`/`chromium` dans le PATH.
+- `bin/planche.py <slug>` : planche de contrôle (toutes les slides) dans `work/planches/<slug>.png`. `bin/run-hebdo.sh` : lancement de la tâche hebdo sur le VPS (voir `ozi-tache-hebdo.md`).
 
 ## Charte
 

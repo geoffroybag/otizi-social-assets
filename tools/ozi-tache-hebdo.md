@@ -37,3 +37,32 @@ claude -p "$(cat tools/tache-hebdo.md)" --allowedTools "Bash,Read,Write,Edit,Web
 ```
 
 (adapter le nom du serveur MCP et la politique d'autorisations à la configuration d'Ozi ; le compte rendu final est renvoyé par Ozi en push.)
+
+## Installé le 3 novembre 2026 (VPS, utilisateur `otizi`)
+
+Mise en place faite par Claude Code sur le VPS ; répétition à blanc réussie le jour même (semaine du 9 novembre, trois brouillons Metricool, 11 minutes).
+
+**Dépôt et push.** `~/otizi-social-assets`, remote HTTPS `https://github.com/geoffroybag/otizi-social-assets.git`. Le push s'authentifie par `tools/bin/git-credential-ozi.sh` (aide d'identification git, configurée dans `.git/config` du clone, pas dans le dépôt) : elle lit `GITHUB_TOKEN` dans le fichier d'environnement d'Ozi (`/home/otizi/ozi/deploy/.env`) au moment du push, sans jamais le stocker ni l'afficher.
+
+**Rendu.** Chromium de Playwright, déjà présent : `~/.cache/ms-playwright/chromium-1194/chrome-linux/chrome` (variable `OTIZI_CHROME`, posée par le script de lancement), avec les bibliothèques apt `libatk1.0-0t64 libatk-bridge2.0-0t64 libatspi2.0-0t64 libxdamage1 libasound2t64 libcairo2 libcups2t64 libpango-1.0-0`. Pillow par le paquet `python3-pil`. Police : `tools/fonts/figtree/` (clone de erikdkennedy/figtree, ignoré par git ; à recloner si le dossier manque). `tools/carrousel_lib.py` calcule tout seul la racine du dépôt, la police et le dossier `work/` ; les PNG sont rendus dans une fenêtre 1080×1500 puis recadrés à 1080×1350 (ce Chromium perd ~90 px en bas sinon). Planche de contrôle : `python3 tools/bin/planche.py <slug>` → `work/planches/<slug>.png`.
+
+**Metricool.** Serveur MCP `metricool` ajouté à Claude Code en portée utilisateur (`claude mcp add --scope user --transport http metricool https://ai.metricool.com/mcp`), authentifié par Geoffroy (`/mcp`, compte otizi.app@gmail.com). Vérifié : marque Otizi, `blogId` 7842510, Instagram `otizi_app`, fuseau Europe/Paris. `claude mcp list` doit dire « Connected » ; sinon, refaire `/mcp` dans une session interactive sous `otizi`.
+
+**Script de lancement.** `tools/bin/run-hebdo.sh` : `git pull`, prompt = `tools/tache-hebdo-vps.md` (préambule VPS, prioritaire) + `tools/tache-hebdo.md`, puis `claude -p` avec `--allowedTools "Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,mcp__metricool"`, délai de 40 minutes (`timeout`), verrou `work/.run-hebdo.lock`. Journal : `work/logs/AAAA-MM-JJ.log` (plus `work/logs/cron.log` pour les passages du cron). Compte rendu écrit par la tâche dans `work/compte-rendu.md`, puis déposé dans Ozi.
+
+- `run-hebdo.sh` (sans option) : lancement à la main, mode « manual ».
+- `run-hebdo.sh --cron` : ne tourne que s'il est 7 h à Paris, et si la routine est cochée sur la page État d'Ozi.
+- `run-hebdo.sh --poll` : toutes les deux minutes ; lance si « Lancer maintenant » a été cliqué sur la page État d'Ozi, sinon sort sans rien faire.
+- `run-hebdo.sh --test` : répétition, ajoute `work/consigne-test.md` au prompt (sujets, dates, garde-fous).
+- `run-hebdo.sh --dry` : affiche le prompt assemblé.
+
+**Cron** (`crontab -e` sous `otizi` ; le système est en UTC, le script ne garde que l'appel qui tombe à 7 h de Paris) :
+
+```
+0 5,6 * * 1 /home/otizi/otizi-social-assets/tools/bin/run-hebdo.sh --cron >> /home/otizi/otizi-social-assets/work/logs/cron.log 2>&1
+*/2 * * * * /home/otizi/otizi-social-assets/tools/bin/run-hebdo.sh --poll >> /home/otizi/otizi-social-assets/work/logs/cron.log 2>&1
+```
+
+**Compte rendu et tableau de bord dans Ozi.** Le script dialogue avec `http://127.0.0.1:3001/api/internal/carousels` (secret `OZI_DEPLOY_SECRET`, lu dans le fichier d'environnement d'Ozi à l'appel) : `GET` (routine active ? lancement demandé ?), `POST { event: "start" }` au début, `POST { event: "end", status, summary }` à la fin. Ozi en fait une conversation « 📸 Carrousels hebdo — <date> », prévient le téléphone, et la page État (bloc « Carrousels Instagram ») montre le dernier et le prochain passage, une case pour couper la routine, et « Lancer maintenant ». Tant que cette version d'Ozi n'est pas déployée, le script se replie sur la route Todo (`POST /api/internal/todo/conversations`, secret `OZI_TODO_SECRET`) : la conversation est alors ouverte avec le compte rendu en consigne et Ozi le relaie.
+
+**Lancer à la main** : `cd ~/otizi-social-assets && tools/bin/run-hebdo.sh` (ou `--test` après avoir écrit `work/consigne-test.md`). **Désactiver** : décocher « Préparer les carrousels Instagram chaque lundi » sur la page État d'Ozi (le cron appelle, le script sort aussitôt), ou commenter les deux lignes du cron. **Vérifier** : `crontab -l`, `tail work/logs/cron.log`, `claude mcp list`.
