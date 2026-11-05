@@ -27,6 +27,14 @@ Avant de réapprovisionner le Stock par une recherche web, piocher d'abord dans 
 
 | Famille | Sujet | Quand | Notes |
 |---|---|---|---|
+| Actu | Combien vous coûtent vraiment les plateformes ? (lancement du simulateur de commissions) | dès la mise en ligne de otizi.fr/outils/simulateur-commissions/ — vérifier l'URL avant de piocher | exemple chiffré : 30 000 € de CA → environ 3 900 € de commissions par an, 19 500 € sur 5 ans (répartition par défaut du simulateur) ; dernier slide = lien en bio vers l'outil ; article blog qui embarque le simulateur ; relais en story ; voir `tools/idees-contenu.md` §4 |
+| Actu | Le plateau des plateformes : pourquoi le direct redevient stratégique | après le post simulateur | Eurostat : nuitées via plateformes +6,9 % jan.–juin 2026 contre +13,4 % en 2025 ; France n° 1 en Europe (213 M de nuitées en 2025) ; renvoie au simulateur |
+| Actu | Enregistrement national obligatoire : le guide pas à pas | | service-public.gouv.fr ; concerne aussi ceux qui ont déjà un numéro ; les chambres d'hôtes restent en déclaration mairie |
+| Conseil | Les 5 réglages de calendrier qui font perdre des réservations | | durée minimum, délai de préparation, fenêtre de réservation, jours d'arrivée ; sans chiffre |
+| Conseil | Le message post-séjour qui fait revenir les clients en direct | | modèle de message ; pas de chiffre inventé ; renvoie au simulateur |
+| Actu | Taxe d'habitation : votre commune peut vous exonérer | avant les budgets communaux (déc.–janv.) | loi de finances 2026 : exonération possible partout sur vote local, gîtes ruraux exclus de plein droit ; modèle de courrier à la mairie en téléchargement (capture email) |
+| Actu | Chambres d'hôtes : fin de l'exonération 760 € au 31 déc. 2026 | mi-décembre | que faire au 1er janvier ; à lier au post cotisations du 9 nov. |
+| Vie d'hôte | Été 2026 : record depuis 15 ans, mais sans les étrangers | | Insee Focus n° 387 : plus de deux nuitées sur trois sont françaises ; conséquence : viser familles françaises et proximité |
 | Conseil | Livret d'accueil : ce qu'il doit contenir en 2026 | semaine du 16 nov. | arrivée autonome, Wi-Fi, tri, numéros utiles, règles façon « demandes » |
 | Actu | Budget 2027 : ce qui a été voté pour les meublés | mer 18 nov., après le vote solennel du mar 17 | amortissement 1,5 %/5 000 € par foyer ; préparé le ven 13 en version « ce qui est prévu », à finaliser le 17 au soir |
 | Actu | Airbnb : les nouvelles règles entrent en vigueur | ven 20 nov. | rappel + retours d'hôtes ; boucle avec le post du 3 nov. |
@@ -42,12 +50,12 @@ Avant de réapprovisionner le Stock par une recherche web, piocher d'abord dans 
 | Conseil | Accueillir des animaux, ou pas | | |
 | Vie d'hôte | Les demandes de voyageurs les plus absurdes | | |
 | Vie d'hôte | Gîte vs chambre d'hôtes : deux métiers | | |
-| Vie d'hôte | Ouvrir un gîte en 2026, par où commencer | | |
+| Conseil | Ouvrir un gîte en 2026 : les 10 démarches dans l'ordre | | déclaration mairie, enregistrement national, SIRET, assurance, taxe de séjour ; cible nouveaux hébergeurs ; check-list téléchargeable par email (outil à faire) |
+| Conseil | Faut-il être sur Airbnb ET Booking au début ? | | cible nouveaux hébergeurs |
+| Conseil | Première saison : fixer ses prix sans se brader | | cible nouveaux hébergeurs ; renvoie au futur calculateur de prix plancher |
 | Vie d'hôte | Tendances de voyage 2027 | | début 2027 |
 | Actu | Loi Le Meur, deux ans après (19 nov. 2024) | autour du 19 nov. | |
 | Actu | DPE et meublés de tourisme | | |
 | Actu | Acomptes plafonnés à 25 % (décret 2026-121) | | |
 | Actu | Nouveautés Airbnb de l'hiver | | |
-| Actu | Booking et le direct : ce que coûte vraiment une réservation | | |
-| Actu | Meublé non classé : micro-BIC 15 000 € / 30 % | | |
-| Actu | Faut-il faire classer son gîte ? | | |
+| Actu | Faut-il faire classer son gîte ? (micro-BIC 77 700 € / 50 % vs 15 000 € / 30 %) | | fusionne « Meublé non classé » ; renvoie au futur simulateur micro-BIC |
