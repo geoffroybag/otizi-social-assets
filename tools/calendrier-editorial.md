@@ -10,6 +10,8 @@ Deux listes, à tenir à jour à chaque passage :
 
 Ce fichier se lit aussi sur la page État d'Ozi (bloc « Carrousels Instagram ») et se modifie sur GitHub.
 
+Avant de réapprovisionner le Stock par une recherche web, piocher d'abord dans la banque d'idées `tools/idees-contenu.md` (sujets validés par Geoffroy le 5 nov. 2026, classés par public : hébergeurs installés, nouveaux hébergeurs, études open data, outils).
+
 ## Programmés
 
 | Date | Famille | Sujet | État | Notes |
