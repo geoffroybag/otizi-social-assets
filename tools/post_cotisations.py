@@ -9,7 +9,7 @@ N = 9
 SRC_CO = "Source : Compta Online, taux micro-social 2026 (d'après l'Urssaf)"
 SRC_CX = "Source : The Connexion, 23 déc. 2025 (maj 6 janv. 2026)"
 SRC_AN = "Source : Assemblée nationale, réponse ministérielle du 20 mai 2025 (QE n° 6664)"
-SRC_PLF = "Sources : Assemblée nationale, 2e séance du 30 oct. 2026 (amendement I-540) · LCP, 3 nov. 2026"
+SRC_PLF = "Sources : Assemblée nationale, 2e séance du 30 oct. 2026 (amendement I-540) et scrutin n° 9759 du 4 nov. 2026"
 slides = {}
 
 slides["Main.dc.html"] = page("Couverture", category_pill("Actu", "actu"),
@@ -80,11 +80,11 @@ slides["S5.dc.html"] = page("L'abattement fiscal", f"6 / {N}",
 
 slides["S6.dc.html"] = page("Budget 2027", f"7 / {N}",
     f"""
-    {title_plain(["Le budget 2027", "pourrait corriger… en partie"], 70)}
-    {para("Le 30 octobre 2026, les députés ont adopté en séance, par 37 voix contre 35, l'amendement I-540 du député Frédéric Falcon : retour au régime d'avant la loi Le Meur, soit 71 % d'abattement, pour les chambres d'hôtes, les gîtes ruraux et les meublés classés.", 31)}
+    {title_plain(["Budget 2027 : la correction", "votée, puis tombée"], 70)}
+    {para("Le 30 octobre 2026, les députés avaient adopté en séance, par 37 voix contre 35, l'amendement I-540 du député Frédéric Falcon : retour au régime d'avant la loi Le Meur, soit 71 % d'abattement, pour les chambres d'hôtes, les gîtes ruraux et les meublés classés.", 31)}
     <div style="display: flex; flex-direction: column; gap: 14px">
-      {card("l'amendement ne compte que si la première partie du budget est votée. Vote reporté, rejet jugé probable, échéance le 17 novembre, puis le Sénat.", "Rien n'est acquis :")}
-      {card("l'amendement porte sur l'impôt sur le revenu, pas sur le taux de 21,2 %.", "Il ne touche pas les cotisations :", light=True)}
+      {card("l'Assemblée a rejeté la première partie du budget, par 458 voix contre 0. Tout le texte est rejeté, et l'amendement tombe avec lui. Le Sénat repart du texte initial du gouvernement.", "Le 4 novembre,")}
+      {card("l'amendement portait sur l'impôt sur le revenu, pas sur le taux de 21,2 %.", "Il ne touchait pas les cotisations :", light=True)}
     </div>
     """,
     SRC_PLF, body_gap=30)
@@ -106,9 +106,9 @@ slides["S8.dc.html"] = page("À retenir", f"9 / {N}",
     <div style="display: flex; flex-direction: column; gap: 14px">
       {item("21,2 % de cotisations depuis le 1er janvier 2026, contre 6 % pour un gîte classé", "no")}
       {item("Abattement fiscal ramené de 71 % à 50 % depuis les revenus 2025", "no")}
-      {item("Un amendement adopté en séance le 30 octobre rétablirait les 71 % : vote de la première partie du budget à venir, puis le Sénat", "yes")}
+      {item("L'amendement du 30 octobre, qui rétablissait les 71 %, est tombé avec le rejet du budget à l'Assemblée le 4 novembre. La suite se joue au Sénat", "no")}
     </div>
-    {para("Sources : Compta Online, taux micro-social 2026 (maj 14 sept. 2026) · The Connexion, 23 déc. 2025 · Assemblée nationale, réponse à la QE n° 6664, 20 mai 2025 · Assemblée nationale, 2e séance du 30 oct. 2026 et amendement I-540 · LCP, 3 nov. 2026.", 22, MUTED)}
+    {para("Sources : Compta Online, taux micro-social 2026 (maj 14 sept. 2026) · The Connexion, 23 déc. 2025 · Assemblée nationale, réponse à la QE n° 6664, 20 mai 2025 · Assemblée nationale, 2e séance du 30 oct. 2026 (amendement I-540) et scrutin n° 9759 du 4 nov. 2026.", 22, MUTED)}
     """,
     "Chaque semaine, ce qui change pour les gîtes et chambres d'hôtes",
     f'<span style="display: inline-flex; align-items: center; gap: 10px; color: {VIOLET}; font-weight: 900">Suivez-nous {icon("arrow")}</span>',
