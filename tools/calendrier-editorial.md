@@ -43,6 +43,8 @@ Avant de réapprovisionner le Stock par une recherche web, piocher d'abord dans 
 | Actu | Taxe de séjour 2027 : nouveaux tarifs, qui collecte quoi | début décembre | communes ont voté avant le 1er oct. ; application 1er janv. |
 | Vie d'hôte | Portrait d'hôte : un client raconte son premier hiver | | besoin d'un volontaire (Geoffroy) : ne pas piocher sans son accord |
 | Conseil | Rédiger une annonce qui convertit | | |
+| Conseil | Les micro-doutes qui font basculer vos clients vers une OTA | | idée de Geoffroy (4 nov.) : les voyageurs ne quittent pas le site d'un hébergeur pour un gros problème technique mais pour de petites hésitations, des moments subtils mais décisifs ; lister ces micro-doutes et comment les lever |
+| Conseil | Et si le secret des réservations directes résidait dans l'anticipation ? | | idée de Geoffroy (4 nov.) : anticiper les questions, les besoins et les objections du voyageur avant qu'il ne les formule ; angle hôte, pas de pub Otizi dans les slides |
 | Conseil | Des photos sans photographe | | |
 | Conseil | Gérer un avis injuste | | |
 | Conseil | Arrivée autonome sans stress | | |
